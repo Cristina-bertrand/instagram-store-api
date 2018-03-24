@@ -6,12 +6,17 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
+const corsConfig = require('./configs/cors.config');
 
 require('./configs/db.config');
+
 
 const usersRoutes = require('./routes/users.route');
 
 const app = express();
+
+app.use(cors(corsConfig));
 
 
 // uncomment after placing your favicon in /public
