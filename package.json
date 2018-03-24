@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "DEBUG=instagram-store-api:* nodemon ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
+    "mongoose": "^5.0.11",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.2",
     "npm": "^5.8.0",
