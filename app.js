@@ -12,16 +12,15 @@ const passport = require('passport');
 const session = require('express-session');
 const paypal = require('paypal-rest-sdk');
 
-
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 require('./configs/paypal.config');
-
 
 const usersRoutes = require('./routes/users.routes');
 const sessionRoutes = require('./routes/sessions.routes');
 const shopRoutes = require('./routes/shops.routes');
 const productRoutes = require('./routes/products.routes');
+const shoppingCartRoutes = require('./routes/shoppingCart.routes');
 
 const app = express();
 
@@ -60,6 +59,15 @@ app.use('/users', usersRoutes);
 app.use('/session', sessionRoutes);
 app.use('/shops', shopRoutes);
 app.use('/products', productRoutes);
+app.use('/shoppingCart', shoppingCartRoutes);
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': 'AV447YY0-sO1dO0Bf89dY2Epx50_uc7nGhlB6mh5hKa1ZPK7uVOSCaWol8s41D2b6omr3M9JrxY0G_bd',
+    'client_secret': 'EMuZkHZBRZfzcIxL2olB3W3IzV-LovcR-Ke4mepxQy44Xl1N-SWR6-fZbj72WpTEAG6XEcICRthz_H4o'
+    // 'client_id': process.env.PAYPAL_CLIENT_ID,
+    // 'client_secret': process.env.PAYPAL_CLIENT_SECRET
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next)  => {

@@ -10,14 +10,15 @@ const productSchema = new mongoose.Schema({
         default: ''
     },
     price: {
-        type: Number,
-        default: ''
+      type: Number,
+      required: [true, `Price can't be empty`],
+      min: 0
     },
     owner: {
-    type: Schema.Types.ObjectId,
-    ref: 'Shop',
-    required: true
-  },
+      type: Schema.Types.ObjectId,
+      ref: 'Shop',
+      required: true
+    },
 }, {
     timestamps: true,
     toJSON: {
