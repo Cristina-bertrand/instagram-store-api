@@ -75,6 +75,7 @@ module.exports.delete = (req, res, next) => {
 
 module.exports.like = (req, res, next) => {
   const shopId = req.params.id;
+  console.log(req.user.id);
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: shopId } })
     .then(user => {
       res.status(204).json()

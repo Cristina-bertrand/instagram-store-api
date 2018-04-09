@@ -10,9 +10,12 @@ const cors = require('cors');
 const corsConfig = require('./configs/cors.config');
 const passport = require('passport');
 const session = require('express-session');
+const paypal = require('paypal-rest-sdk');
+
 
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
+require('./configs/paypal.config');
 
 
 const usersRoutes = require('./routes/users.routes');
