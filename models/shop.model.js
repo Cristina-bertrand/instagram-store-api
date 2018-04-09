@@ -11,7 +11,10 @@ const shopSchema = new mongoose.Schema({
     specs: {
         type: [String],
         default: []
-    }
+    },
+    direction: {
+       type: String,
+   },
 }, {
     timestamps: true,
     toJSON: {

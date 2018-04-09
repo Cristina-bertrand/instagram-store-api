@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'User needs a password']
-  }
+  },
+  favourite: [{
+      type: mongoose.Schema.ObjectId,
+      ref: 'Shop'
+    }],
 }, {
   timestamps: true,
   toJSON: {

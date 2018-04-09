@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Shop = require('../models/shop.model');
 const ApiError = require('../models/api-error.model');
+const User = require('../models/user.model')
 
 module.exports.list = (req, res, next) => {
   Shop.find()
@@ -67,7 +68,16 @@ module.exports.delete = (req, res, next) => {
       if (shop) {
         res.status(204).json()
       } else {
-        next(new ApiError(`Phone not found`, 404));
+        next(new ApiError(`Shop not found`, 404));
       }
     }).catch(error => next(error));
+}
+
+module.exports.like = (req, res, next) => {
+  const shopId = req.params.id;
+  User.findByIdAndUpdate(req.user._id, { $push: { favourite: shopId } })
+    .then(user => {
+      res.status(204).json()
+    })
+    .catch(error => next(error));
 }
