@@ -5,7 +5,7 @@ const secureMiddleware = require('../middleware/secure.middleware');
 const shopsMiddleware = require('../middleware/shops.middleware');
 const uploadConfig = require('../configs/multer.config');
 
-router.get('/', secureMiddleware.isAuthenticated, shopsController.list);
+router.get('/', shopsController.list);
 router.get('/:id', secureMiddleware.isAuthenticated,shopsMiddleware.checkValidId, shopsController.get);
 router.post('/', secureMiddleware.isAuthenticated, uploadConfig.single('image'), shopsController.create);
 router.put('/:id', secureMiddleware.isAuthenticated, uploadConfig.single('image'), shopsController.edit);

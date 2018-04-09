@@ -23,3 +23,39 @@ module.exports.create = (req, res, next) => {
       }
     }).catch(error => next(new ApiError('User already registered', 500)));
 }
+
+module.exports.delete = (req, res, next) => {
+  const id = req.params.id;
+  User.findByIdAndRemove(id)
+  .then(user => {
+    if(user){
+      res.status(204).json({message: 'User deleted'});
+    }else{
+      next(new ApiError(`User not found`, 404));
+    }
+  }).catch(error => next(error));
+}
+
+module.exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  User.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+  .then(user => {
+    if(user){
+      res.json(user);
+    }else{
+      next(new ApiError('user not found', 404));
+    }
+  }).catch(error => {
+    if (error instanceof mongoose.Error.ValidationError) {
+      next(new ApiError(error.message, 400, error.errors));
+    } else {
+      next(new ApiError(error.message, 500));
+    }
+  });
+}
+
+module.exports.list = (req, res, next) => {
+  User.find()
+  .then(user => res.json(user))
+  .catch(error => next(error));
+}
