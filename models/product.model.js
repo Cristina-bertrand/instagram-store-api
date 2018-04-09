@@ -1,27 +1,23 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
-const shopSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'The shop name is required']
+        required: [true, 'The product name is required']
     },
     image: {
         type: String,
         default: ''
     },
-    specs: {
-        type: [String],
-        default: []
+    price: {
+        type: Number,
+        default: ''
     },
-    direction: {
-       type: String,
-   },
-   products: [
-   {
-     type: Schema.Types.ObjectId,
-     ref: 'Product'
-   }
- ],
+    owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'Shop',
+    required: true
+  },
 }, {
     timestamps: true,
     toJSON: {
@@ -34,5 +30,5 @@ const shopSchema = new mongoose.Schema({
     }
  });
 
- const Shop = mongoose.model('Shop', shopSchema);
- module.exports = Shop;
+ const Product = mongoose.model('Product', productSchema);
+ module.exports = Product;

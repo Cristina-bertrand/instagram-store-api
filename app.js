@@ -14,9 +14,11 @@ const session = require('express-session');
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
-const shopRoutes = require('./routes/shops.routes')
+
 const usersRoutes = require('./routes/users.routes');
 const sessionRoutes = require('./routes/sessions.routes');
+const shopRoutes = require('./routes/shops.routes');
+const productRoutes = require('./routes/products.routes');
 
 const app = express();
 
@@ -51,10 +53,10 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.use('/shops', shopRoutes);
 app.use('/users', usersRoutes);
 app.use('/session', sessionRoutes);
+app.use('/shops', shopRoutes);
+app.use('/products', productRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)  => {

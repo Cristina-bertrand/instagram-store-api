@@ -9,7 +9,12 @@ const shops = [
     "specs": [
       "party",
       "dresses"
-    ]
+    ],
+    "products": [{
+      "name": "Falda",
+      "image": "http://www.hoteljulesverne-sitedufuturoscope.es/image/cache/data/category_4/versus-falda-con-logo-en-la-cinturlla-bd80496bk00652--1622-500x500_0.jpg",
+      "price": 14,
+    },]
   },
   {
     "name": "Missguided",
