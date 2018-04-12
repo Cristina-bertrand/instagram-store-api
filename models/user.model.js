@@ -4,6 +4,9 @@ const Schema   = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
   email: {
     type: String,
     lowercase: true,
@@ -16,9 +19,17 @@ const userSchema = new mongoose.Schema({
     required: [true, 'User needs a password']
   },
   favourite: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'Shop'
-    }],
+    type: mongoose.Schema.ObjectId,
+    ref: 'Shop'
+  }],
+  shop: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Shop'
+  }],
+  isAdmin: {
+  type: Boolean,
+  default: false
+},
 }, {
   timestamps: true,
   toJSON: {

@@ -16,6 +16,11 @@ const shopSchema = new mongoose.Schema({
     direction: {
        type: String,
    },
+   list: {
+     type: String,
+     enum: ['Shop', 'Brand'],
+     required: true
+   },
    products: [
    {
      type: Schema.Types.ObjectId,

@@ -5,7 +5,7 @@ const shoppingCartController = require('../controllers/shoppingCart.controller')
 //ShoppingCart
 router.get('/', shoppingCartController.list);
 router.get('/:email/:name', shoppingCartController.removeProductFromCart);
-router.get('/:name', shoppingCartController.addProductToCart);
+router.post('/:name', shoppingCartController.addProductToCart);
 
 //Paypal
 router.post('/:id/pay', shoppingCartController.pay);

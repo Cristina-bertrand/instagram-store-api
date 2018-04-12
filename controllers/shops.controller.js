@@ -22,13 +22,16 @@ module.exports.get = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
-  const shop = new Shop(req.body);
+  const newshop = new Shop(req.body);
   if (req.file) {
     shop.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
   }
-  shop.save()
-    .then(() => {
-      res.status(201).json(shop);
+  newshop.save()
+    .then(shop => {
+      return User.findByIdAndUpdate(req.user._id, { $push: { shop: shop._id } })
+        .then(user => {
+          return res.status(204).json({message: 'success'})
+        })
     })
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
@@ -38,6 +41,8 @@ module.exports.create = (req, res, next) => {
       }
     })
 }
+
+
 
 module.exports.edit = (req, res, next) => {
   const id = req.params.id;
@@ -78,7 +83,7 @@ module.exports.like = (req, res, next) => {
   console.log(req.user.id);
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: shopId } })
     .then(user => {
-      res.status(204).json()
+      res.status(204).json({message: 'success'})
     })
     .catch(error => next(error));
 }

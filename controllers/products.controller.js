@@ -22,7 +22,9 @@ module.exports.get = (req, res, next) => {
 }
 
 module.exports.createProduct = (req, res, next) => {
-  const ownerId = req.shop._id;
+  const newproduct = new Product(req.body);
+  const ownerId = req.user.shop[0];
+  console.log(req.body);
   const product = new Product(req.body);
   if (req.file) {
     shop.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
@@ -32,7 +34,7 @@ module.exports.createProduct = (req, res, next) => {
   console.log(productSaved);
   Shop.findById(ownerId)
   .then(shop => {
-    shop.products.push(product._id);
+    shop.products.push(product.id);
     shop.save()
     .then(() => {
       res.json(product);
@@ -49,6 +51,28 @@ module.exports.createProduct = (req, res, next) => {
     })
     .catch(error => next(new ApiError('Couldn\'t save product', 400)))
   }
+
+  // module.exports.createProduct = (req, res, next) => {
+  //   const newproduct = new Product(req.body);
+  //
+  //   if (req.file) {
+  //     newproduct.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  //   }
+  //   newproduct.save()
+  //     .then(product => {
+  //       return  Shop.findByIdAndUpdate(req.params._id, { $push: { product: shop.product } })
+  //         .then(shop => {
+  //           return res.status(204).json({message: 'success'})
+  //         })
+  //     })
+  //     .catch(error => {
+  //       if (error instanceof mongoose.Error.ValidationError) {
+  //         next(new ApiError(error.errors));
+  //       } else {
+  //         next(new ApiError(error.message, 500));
+  //       }
+  //     })
+  // }
 
 
 module.exports.editProduct = (req, res, next) => {

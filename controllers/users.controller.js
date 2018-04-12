@@ -55,8 +55,7 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.list = (req, res, next) => {
-  const id = req.params.id;
-  User.findById(id)
-  .then(user => res.json(user))
+  User.find()
+  .then(users => res.json(users))
   .catch(error => next(error));
 }

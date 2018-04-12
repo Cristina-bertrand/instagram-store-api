@@ -5,20 +5,20 @@ const Shop = require('../models/shop.model');
 const shops = [
   {
     "name": "Revolve",
-    "image": "https://consumer-img.huawei.com/content/dam/huawei-cbg-site/common/support/list-image/phones/p8-lite-2017/p8-lite-2017-listimage-black.png",
+    "image": "http://img3.codigonuevo.com/ab/01/6b/20170906110423_00001.jpg",
     "specs": [
       "party",
       "dresses"
     ],
     "products": [{
       "name": "Falda",
-      "image": "http://www.hoteljulesverne-sitedufuturoscope.es/image/cache/data/category_4/versus-falda-con-logo-en-la-cinturlla-bd80496bk00652--1622-500x500_0.jpg",
+      "image": "https://static.vix.com/es/sites/default/files/styles/m/public/m/mujer-no-sabe-que-prenda-escoger.jpg?itok=W147Ynhi",
       "price": 14,
     },]
   },
   {
     "name": "Missguided",
-    "image": "https://boltmobile.ca/wp-content/uploads/2016/09/iphone7-plus-front-web-boltmobile-sasktel.png",
+    "image": "http://cdn.vogue.es/uploads/images/thumbs/es/vog/2/s/2018/01/moda_tendencias_voguees_17817772_620x413.jpg",
     "specs": [
       "jackets",
       "t-shirts"
@@ -26,7 +26,7 @@ const shops = [
   },
   {
     "name": "Asos",
-    "image": "http://catalogo.movistar.com.pe/ArchivosUsuario/EquipoCaracteristica/g-flex-2-h955p_528_Imagen.png",
+    "image": "http://www.abc.es/media/economia/2017/01/16/moda-k7DB--620x349@abc.jpg",
     "specs": [
       "summer"
     ]
