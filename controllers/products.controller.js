@@ -30,6 +30,7 @@ module.exports.get = (req, res, next) => {
 }
 
 
+
 module.exports.createProduct = (req, res, next) => {
   const newproduct = new Product(req.body);
   const ownerId = req.user.shop[0];

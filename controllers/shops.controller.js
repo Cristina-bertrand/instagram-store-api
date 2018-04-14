@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Shop = require('../models/shop.model');
 const ApiError = require('../models/api-error.model');
 const User = require('../models/user.model');
+const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
   Shop.find()
@@ -19,6 +20,19 @@ module.exports.get = (req, res, next) => {
         next(new ApiError(`Shop not found`, 404));
       }
     }).catch(error => next(error));
+}
+
+module.exports.getShopProducts = (req, res, next) => {
+  const id = req.params.id;
+  Shop.findById(id).populate('products')
+    .then(shop =>  {
+      if (shop) {
+        res.json(shop)
+      } else {
+        next(new ApiError(`Product not found`, 404));
+      }
+    })
+    .catch(error => next(error));
 }
 
 module.exports.create = (req, res, next) => {
