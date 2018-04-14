@@ -5,30 +5,31 @@ const Shop = require('../models/shop.model');
 const shops = [
   {
     "name": "Revolve",
-    "image": "http://img3.codigonuevo.com/ab/01/6b/20170906110423_00001.jpg",
+    "description": "REVOLVE currently in Hotel Revolve click below to shop our feed ",
+    "direction": "Hotel Revolve",
+    "list": "Shop",
+    "image": "Resolve-front.png",
     "specs": [
-      "party",
-      "dresses"
-    ],
-    "products": [{
-      "name": "Falda",
-      "image": "https://static.vix.com/es/sites/default/files/styles/m/public/m/mujer-no-sabe-que-prenda-escoger.jpg?itok=W147Ynhi",
-      "price": 14,
-    },]
-  },
-  {
-    "name": "Missguided",
-    "image": "http://cdn.vogue.es/uploads/images/thumbs/es/vog/2/s/2018/01/moda_tendencias_voguees_17817772_620x413.jpg",
-    "specs": [
-      "jackets",
-      "t-shirts"
+      "ropa de verano", "bañadores", "shorts", "vestidos"
     ]
   },
   {
-    "name": "Asos",
-    "image": "http://www.abc.es/media/economia/2017/01/16/moda-k7DB--620x349@abc.jpg",
+    "name": "Missguided",
+    "description": "MISSGUIDED KEEP ON BEING YOU, IT’S A REALLY GREAT LOOK Tag your looks with #babesofmissguided for the chance to feature. Shop our Insta",
+    "list": "Shop",
+    "image": "Missguided-front.png",
     "specs": [
-      "summer"
+      "jerseys", "chaquetas", "pantalones", "vestidos", "faldas"
+    ]
+  },
+  {
+    "name": "Panambi",
+    "description": "Panambi Apuesta por la calidad y elegancia. marketing@panambicollection.com️ 954127227",
+    "direction": "Av.Ramón Carande,7, Sevilla / Claudio Coello 47,1D Madrid",
+    "list": "Brand",
+    "image": "Panambi-front.png",
+    "specs": [
+      "boda", "invitada perfecta", "fiesta"
     ]
   }
 ];

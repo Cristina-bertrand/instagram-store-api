@@ -20,8 +20,8 @@ module.exports.checkUserShopExist = (req, res, next) => {
 
 module.exports.checkUserShopNotExist = (req, res, next) => {
   if (req.user.shop && req.user.shop.length != 0) {
-      next(new ApiError('You need to manage a shop to register a product', 404));
+      next();
   } else {
-    next();
+      next(new ApiError('You need to manage a shop to register a product', 404));
   }
 }

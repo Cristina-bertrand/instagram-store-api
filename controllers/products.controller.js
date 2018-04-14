@@ -3,6 +3,14 @@ const Shop = require('../models/shop.model');
 const ApiError = require('../models/api-error.model');
 const Product = require('../models/product.model');
 
+module.exports.index = (req, res, next) => {
+  Product.find()
+    .then(products => {
+      res.json(products)
+    })
+    .catch(error => next(error))
+};
+
 module.exports.list = (req, res, next) => {
   Product.find()
     .then(product => res.status(200).json(product))
@@ -20,6 +28,7 @@ module.exports.get = (req, res, next) => {
       }
     }).catch(error => next(error));
 }
+
 
 module.exports.createProduct = (req, res, next) => {
   const newproduct = new Product(req.body);
@@ -60,7 +69,7 @@ module.exports.createProduct = (req, res, next) => {
   //   }
   //   newproduct.save()
   //     .then(product => {
-  //       return  Shop.findByIdAndUpdate(req.params._id, { $push: { product: shop.product } })
+  //       return  Shop.findByIdAndUpdate(req.user.shop[0], { $push: { product: shop.product } })
   //         .then(shop => {
   //           return res.status(204).json({message: 'success'})
   //         })

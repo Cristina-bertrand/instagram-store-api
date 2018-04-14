@@ -13,6 +13,9 @@ const shopSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
+    description: {
+       type: String,
+   },
     direction: {
        type: String,
    },
