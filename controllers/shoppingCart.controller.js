@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const ShoppingCart = require('../models/shoppingCart.model');
 const Product = require('../models/product.model');
 const paypal = require('../configs/paypal.config');
+const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
   //Aquí tenemos que trabajar con las cookies para poder pasar a la vista carrito la info de carrito de un no-logueado
