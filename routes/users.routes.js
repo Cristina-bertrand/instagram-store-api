@@ -5,6 +5,7 @@ const usersController = require('../controllers/users.controller');
 
 router.post('/', usersController.create);
 router.get('/', usersController.list);
+router.get('/:id', secureMiddleware.isAuthenticated,usersController.getShopLikes);
 router.put('/edit/:id',secureMiddleware.isAuthenticated, usersController.edit);
 router.delete('/:id', usersController.delete);
 

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const ShoppingCart = require('../models/shoppingCart.model');
 const Product = require('../models/product.model');
-const paypal = require('../configs/paypal.config');
+const paypalConfig = require('../configs/paypal.config');
+const paypal = require('paypal-rest-sdk');
 const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
@@ -86,29 +87,22 @@ module.exports.addProductToCart = (req, res, next) => {
 
 
 module.exports.pay = (req, res, next) => {
+  const create_payment_json = paypalConfig.createPayment(req.body);
 
-  const create_payment_json = paypalConfig.createPayment(newPurchase);
-
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-          for (let i = 0; i < payment.links.length; i++) {
-              if (payment.links[i].rel === 'approval_url') {
-                console.log(payment.links[i].href)
-                let paymentToken = payment.links[i].href.slice(-20);
-
-                //get token of the transaction
-                newPurchase.paymentToken = paymentToken
-                // //save the purchase of the user
-                // user.paymentTokens.push(newPurchase.paymentToken)
-                // user.save()
-              } else {
-                 (new ApiError(error.message, 500))
-              }
+  paypal.payment.create(create_payment_json, function (error, payment) {
+      if (error) {
+          console.log(error.response);
+          throw error;
+      } else {
+        const response = {};
+        for (var index = 0; index < payment.links.length; index++) {
+          if (payment.links[index].rel === 'approval_url') {
+            response.redirectUrl = payment.links[index].href;
           }
         }
-    })
+        res.json(response);
+      }
+  });
 };
 
 module.exports.executePayment = (req, res, next) => {
@@ -125,7 +119,7 @@ module.exports.executePayment = (req, res, next) => {
            console.log(error.response);
            throw error;
          } else {
-           console.log(JSON.stringify(payment));
+           res.redirect('http://localhost:4200/')
         }
       })
 };

@@ -8,30 +8,30 @@ const paypal = require('paypal-rest-sdk');
 
 
 module.exports.createPayment = (newPurchase) => {
-    return create_payment_json = {
-    "intent": "sale",
-    "payer": {
-        "payment_method": "paypal"
+  return {
+    intent: "sale",
+    payer: {
+      payment_method: "paypal"
     },
-    "redirect_urls": {
-        "return_url": "http://localhost:3000/shoppingCart/success",
-        "cancel_url": "http://localhost:3000/shoppingCart/cancel"
+    redirect_urls: {
+      return_url: "http://localhost:3000/shoppingCart/success",
+      cancel_url: "http://localhost:3000/shoppingCart/cancel"
     },
-    "transactions": [{
-        "item_list": {
-            "items": [{
-                "name": "newPurchase.name",
-                "sku": "001",
-                "price": "newPurchase.price",
-                "currency": "newPurchase.currency",
-                "quantity": "newPurchase.quantity"
-            }]
-        },
-        "amount": {
-            "currency": "newPurchase.currency",
-            "total": "newPurchase.price"
-        },
-        "description": "Payment details"
+    transactions: [{
+      item_list: {
+        items: [{
+          name: newPurchase.name,
+          sku: "001",
+          price: newPurchase.price,
+          currency: 'EUR',
+          quantity: '1'
+        }]
+      },
+      amount: {
+        currency: 'EUR',
+        total: newPurchase.price
+      },
+      description: "Payment details"
     }]
-};
+  };
 };

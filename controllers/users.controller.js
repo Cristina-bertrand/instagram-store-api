@@ -59,3 +59,16 @@ module.exports.list = (req, res, next) => {
   .then(users => res.json(users))
   .catch(error => next(error));
 }
+
+module.exports.getShopLikes = (req, res, next) => {
+  const id = req.params.id;
+  User.findById(id).populate('favourite')
+    .then(shop =>  {
+      if (shop) {
+        res.json(shop)
+      } else {
+        next(new ApiError(`You don't have favourites shops`, 404));
+      }
+    })
+    .catch(error => next(error));
+}
